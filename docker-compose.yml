@@ -1,0 +1,13 @@
+services:
+  docs:
+    image: ghcr.io/haeri/tinydocs:latest
+    container_name: tinyDocs
+    build: ./
+    ports:
+      - "80:80"
+    volumes:
+      - ./pages:/var/www/html/pages
+      # - ./cache:/var/www/html/pages/
+
+      # volumes:
+      #   data:

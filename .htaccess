@@ -1,0 +1,32 @@
+# RewriteEngine On
+
+# Check if the requested file or directory exists
+# RewriteCond %{REQUEST_FILENAME} !-f
+# RewriteCond %{REQUEST_FILENAME} !-d
+
+# Rewrite the URL to the index.php file, passing the requested page as a parameter
+# RewriteRule ^(.+)$ index.php?page=$1 [L,QSA]
+# RewriteRule ^.*$ - [L]
+
+# # Allow access to files and directories in the public folder
+# RewriteCond %{REQUEST_URI} ^/public/.*$ [NC]
+# RewriteRule ^.*$ - [L]
+
+# # Deny access to everything else
+# RewriteRule ^.*$ - [F]
+
+
+# Enable mod_rewrite
+RewriteEngine On
+
+# Allow access to the /public and /search directories
+RewriteRule ^(public)($|/) - [L]
+
+# Redirect requests to /search to /search/index.php
+# RewriteCond %{REQUEST_URI} ^/search
+# RewriteRule ^search/(.*)$ search/index.php [L,QSA]
+
+# Redirect all other requests to index.php, preserving the request method
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ index.php?page=$1 [L,QSA]
